@@ -25,10 +25,10 @@ export default function Register() {
   function register(e) {
     e.preventDefault();
     // se as senhas estão iguais ou nao 
-    if (password != confirmPassword) {
+    if (password !== confirmPassword) {
       return alert("Entered passwords are different!");
     }
-    const url = `http://localhost:5000/cadastro`;
+    const url = `http://localhost:5000/cadastro`
     // para quando tiver o deploy 
     //const url = `${import.meta.env.VITE_API_URL}/cadastro`
 
@@ -42,7 +42,8 @@ export default function Register() {
     setDisabled(true);
     promise.then(response => navigate('/'));
     promise.catch(response => {
-      alert(response.response.data.message);
+      alert(response.response.data);
+      console.log("deu errado")
       setDisabled(false);
     })
   }
@@ -54,7 +55,7 @@ export default function Register() {
         <input placeholder="Name" type="text" required value={name} onChange={(e) => setName(e.target.value)} disabled={disabled} />
         <input placeholder="E-mail" type="email" required value={email} onChange={(e) => setEmail(e.target.value)} disabled={disabled} />
         <input placeholder="Password" type="password" autoComplete="new-password" required value={password} onChange={(e) => setPassword(e.target.value)} disabled={disabled} />
-        <input placeholder="Confirm Password" type="password" autoComplete="new-password" required value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} disabled={disabled} />
+        <input placeholder="Confirm Password" type="password" autoComplete="new-password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} disabled={disabled} />
         <FileInputLabel htmlFor="imagemInput">
           <FileIcon icon={faUpload} className="file-icon" />
           Select profile picture
