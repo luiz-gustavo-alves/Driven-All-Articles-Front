@@ -93,6 +93,7 @@ const SingUpContainer = styled.section`
     margin-top: 30px;
   }
 
+  
   input{
     width: 70vh;
     background-color: #51cf17;
