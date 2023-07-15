@@ -97,34 +97,27 @@ const SingInContainer = styled.section`
     height: 45px;
     background-color: #efefef;
     color: #000;
-
     &:focus {
         outline: 2px solid #000;
     }
-
     &:hover {
         outline: 2px solid #000;
     }
   }
-
   input{
     width: 75%;
     height: 45px;
     background-color: #efefef;
-
     &::placeholder {
       color: #000;
     }
-
     &:focus {
         outline: 2px solid #000;
     }
-
     &:hover {
         outline: 2px solid #000;
     }
   }
-
   a {
     
     &:hover {
@@ -134,12 +127,10 @@ const SingInContainer = styled.section`
 `
 
 const Form = styled.form`
-
     position: relative;
 `;
 
 const Loader = styled.div`
-
   position: absolute;
   bottom: 0;
 `;
