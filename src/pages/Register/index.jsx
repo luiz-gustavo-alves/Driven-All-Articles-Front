@@ -43,10 +43,10 @@ export default function Register() {
 
   return (
     <SingUpContainer>
-      <form onSubmit={submitForm}>
+      <Form onSubmit={submitForm}>
         <AllArticlesLogo />
         <input 
-          placeholder="Name" 
+          placeholder="Nome" 
           type="text"
           name="name"
           required 
@@ -64,7 +64,7 @@ export default function Register() {
           disabled={disabled} />
 
         <input 
-          placeholder="Password" 
+          placeholder="Senha" 
           type="password" 
           name="password"
           required 
@@ -73,7 +73,7 @@ export default function Register() {
           disabled={disabled} />
 
         <input 
-          placeholder="Confirm Password" 
+          placeholder="Confirmar Senha" 
           type="password"
           name="confirmPassword"
           required
@@ -83,7 +83,7 @@ export default function Register() {
 
         <FileInputLabel htmlFor="imagemInput">
           <FileIcon icon={faUpload} className="file-icon" />
-          Select profile picture
+          Selecione uma foto de perfil
           <FileInput 
             id="imagemInput" 
             type="file" 
@@ -95,14 +95,19 @@ export default function Register() {
             disabled={disabled} />
         </FileInputLabel>
 
-        <button type='submit' disabled={disabled}>
-          {disabled ? (
-            <ThreeDots width={32} height={21} border-radius={4.5} background-color="#284ed6" color="#FFFFFF" font-size={9} />
-          ) : (
-            <p>Cadastrar</p>
-          )}
+        <button type='submit' disabled={disabled} >
+         {disabled ? "" : "Entrar"}
         </button>
-      </form>
+        <Loader>
+          <ThreeDots 
+            width={70} 
+            height={45} 
+            border-radius={4.5}
+            color="#000"
+            visible={disabled} 
+            font-size={9} />
+          </Loader>
+      </Form>
 
       <Link to={"/"}>
         Já tem uma conta? Entre agora!
@@ -117,49 +122,77 @@ const SingUpContainer = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #cf171a;
-  color : black;
+  max-width: 600px;
+  margin: 0 auto;
 
   button{
-    width: 75vh;
-    background-color: #174ecf;
-    margin-top: 30px;
+    width: 75%;
+    height: 45px;
+    background-color: #efefef;
+    color: #000;
+
+    &:focus {
+        outline: 2px solid #000;
+    }
+
+    &:hover {
+        outline: 2px solid #000;
+    }
   }
 
-  
-  input{
-    width: 70vh;
-    background-color: #51cf17;
+  input {
+    width: 75%;
+    height: 45px;
+    background-color: #efefef;
 
+    &::placeholder {
+      color: #000;
+    }
+
+    &:focus {
+        outline: 2px solid #000;
+    }
+
+    &:hover {
+        outline: 2px solid #000;
+    }
   }
 
-  a{
-    color : black; 
-  }
+  a {
 
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 `
 const FileInput = styled.input`
     display: none;
   `;
 
 const FileInputLabel = styled.label`
-    width: 71vh;
-    height: 37px;
+    width: 75%;
+    height: 45px;
     position: relative;
-    display: inline-block;
-    background-color: #e9e9e9;
-    color: #333;
-    padding: 8px 12px;
-    border-radius: 4px;
     cursor: pointer;
+
     display: flex;
     align-items: center;
-    font-size: 20px;
+    background-color: #efefef;
     border-radius: 5px;
     outline: none;
-    border: 1px ;
-    text-align: left;
-    background-color: #51cf17;
+    padding: 8px 12px;
+
+    font-size: 20px;
+    font-weight: 500;
+    color: #000;
+
+    &:focus {
+        outline: 2px solid #000;
+    }
+
+    &:hover {
+        outline: 2px solid #000;
+    }
   `;
 
 const FileIcon = styled(FontAwesomeIcon)`
@@ -170,4 +203,13 @@ const FileIcon = styled(FontAwesomeIcon)`
     color: #333;
   `
 
+const Form = styled.form`
 
+  position: relative;
+`;
+
+const Loader = styled.div`
+
+  position: absolute;
+  bottom: 0;
+`;

@@ -6,10 +6,11 @@ const GlobalStyle = createGlobalStyle`
         margin: 0;
         box-sizing: border-box;
     }
-    body {
+    body, html {
         font-family: 'Raleway', sans-serif;
         font-style: normal;
         font-weight: 400;
+        background-color: #217cff;
     }
     button {
         outline: none;

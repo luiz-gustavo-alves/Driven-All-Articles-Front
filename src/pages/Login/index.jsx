@@ -41,11 +41,12 @@ export default function Login() {
 
   return (
     <SingInContainer>
-      <form onSubmit={submitForm}>
+      <Form onSubmit={submitForm}>
         <AllArticlesLogo />
         <input 
           placeholder="E-mail" 
-          type="email" 
+          type="email"
+          name="email" 
           required 
           value={formData.email} 
           onChange={updateForm} 
@@ -54,6 +55,7 @@ export default function Login() {
         <input 
           placeholder="Senha" 
           type="password" 
+          name="password"
           autoComplete="new-password" 
           required 
           value={formData.password} 
@@ -61,13 +63,18 @@ export default function Login() {
           disabled={disabled} />
 
         <button type='submit' disabled={disabled} >
-          {disabled ? (
-            <ThreeDots width={32} height={21} border-radius={4.5} background-color="#133ae4" color="#FFFFFF" font-size={9} />
-          ) : (
-            <p>Entrar</p>
-          )}
+         {disabled ? "" : "Entrar"}
         </button>
-      </form>
+        <Loader>
+          <ThreeDots 
+            width={70} 
+            height={45} 
+            border-radius={4.5}
+            color="#000"
+            visible={disabled} 
+            font-size={9} />
+          </Loader>
+      </Form>
 
       <Link to={"/cadastro"}>
         Primeira vez? Cadastre-se!
@@ -82,15 +89,57 @@ const SingInContainer = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #cf171a;
+  margin: 0 auto;
+  max-width: 600px;
   
-  button{
-    width: 75vh;
-    background-color: #174ecf;
+  button {
+    width: 75%;
+    height: 45px;
+    background-color: #efefef;
+    color: #000;
+
+    &:focus {
+        outline: 2px solid #000;
+    }
+
+    &:hover {
+        outline: 2px solid #000;
+    }
   }
 
   input{
-    width: 70vh;
-    background-color: #51cf17;
+    width: 75%;
+    height: 45px;
+    background-color: #efefef;
+
+    &::placeholder {
+      color: #000;
+    }
+
+    &:focus {
+        outline: 2px solid #000;
+    }
+
+    &:hover {
+        outline: 2px solid #000;
+    }
+  }
+
+  a {
+    
+    &:hover {
+      text-decoration: underline;
+    }
   }
 `
+
+const Form = styled.form`
+
+    position: relative;
+`;
+
+const Loader = styled.div`
+
+  position: absolute;
+  bottom: 0;
+`;
