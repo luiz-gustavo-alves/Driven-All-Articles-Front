@@ -7,72 +7,105 @@ import { ThreeDots } from "react-loader-spinner";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUpload } from '@fortawesome/free-solid-svg-icons';
 
-
-
-
-
-
 export default function Register() {
-  const [name, setName] = useState('');
+
+  const [formData, setFormData] = useState({ name: "", email: "", password: "", confirmPassword: "", image: "" });
   const [disabled, setDisabled] = useState(false);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [image, setImage] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
   const navigate = useNavigate();
 
+  function updateForm(e) {
+    setFormData({...formData, [e.target.name]: e.target.value });
+  }
 
-  function register(e) {
+  function submitForm(e) {
     e.preventDefault();
+
+    const { name, email, password, image, confirmPassword } = formData;
+
     // se as senhas estão iguais ou nao 
     if (password !== confirmPassword) {
-      return alert("Entered passwords are different!");
+      alert("Entered passwords are different!");
     }
+
     const url = `http://localhost:5000/cadastro`
     // para quando tiver o deploy 
     //const url = `${import.meta.env.VITE_API_URL}/cadastro`
 
-    const data = {
-      name: name,
-      email: email,
-      password: password,
-      image: image
-    };
-    const promise = axios.post(url, data)
     setDisabled(true);
-    promise.then(response => navigate('/'));
-    promise.catch(response => {
-      alert(response.response.data);
-      console.log("deu errado")
+
+    const promise = axios.post(url, { name, email, password, image })
+    promise.then(() => navigate('/'));
+    promise.catch(err => {
+      alert(err.message);
       setDisabled(false);
-    })
+    });
   }
 
   return (
     <SingUpContainer>
-      <form onSubmit={register}>
+      <form onSubmit={submitForm}>
         <AllArticlesLogo />
-        <input placeholder="Name" type="text" required value={name} onChange={(e) => setName(e.target.value)} disabled={disabled} />
-        <input placeholder="E-mail" type="email" required value={email} onChange={(e) => setEmail(e.target.value)} disabled={disabled} />
-        <input placeholder="Password" type="password" autoComplete="new-password" required value={password} onChange={(e) => setPassword(e.target.value)} disabled={disabled} />
-        <input placeholder="Confirm Password" type="password" autoComplete="new-password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} disabled={disabled} />
+        <input 
+          placeholder="Name" 
+          type="text"
+          name="name"
+          required 
+          value={formData.name} 
+          onChange={updateForm} 
+          disabled={disabled} />
+
+        <input 
+          placeholder="E-mail" 
+          type="email" 
+          name="email"
+          required 
+          value={formData.email} 
+          onChange={updateForm} 
+          disabled={disabled} />
+
+        <input 
+          placeholder="Password" 
+          type="password" 
+          name="password"
+          required 
+          value={formData.password} 
+          onChange={updateForm} 
+          disabled={disabled} />
+
+        <input 
+          placeholder="Confirm Password" 
+          type="password"
+          name="confirmPassword"
+          required
+          value={formData.confirmPassword} 
+          onChange={updateForm} 
+          disabled={disabled} />
+
         <FileInputLabel htmlFor="imagemInput">
           <FileIcon icon={faUpload} className="file-icon" />
           Select profile picture
-          <FileInput id="imagemInput" type="file" accept="image/*" required value={image} onChange={(e) => setImage(e.target.value)} disabled={disabled} />
+          <FileInput 
+            id="imagemInput" 
+            type="file" 
+            accept="image/*" 
+            name="image"
+            required 
+            value={formData.image} 
+            onChange={updateForm} 
+            disabled={disabled} />
         </FileInputLabel>
+
         <button type='submit' disabled={disabled}>
           {disabled ? (
             <ThreeDots width={32} height={21} border-radius={4.5} background-color="#284ed6" color="#FFFFFF" font-size={9} />
           ) : (
-            <p>Register</p>
+            <p>Cadastrar</p>
           )}
         </button>
       </form>
 
-
       <Link to={"/"}>
-        Already have an account? Get in now!
+        Já tem uma conta? Entre agora!
       </Link>
     </SingUpContainer>
   )

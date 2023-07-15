@@ -1,40 +1,39 @@
 import styled from "styled-components"
 import { Link, useNavigate } from "react-router-dom"
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { ThreeDots } from "react-loader-spinner";
 import axios from "axios";
-import { AuthContext } from "../../contexts/Contex";
+import useAuth from "../../hooks/useAuth";
 import AllArticlesLogo from "../../components/AllArticlesLogo";
-
 
 export default function Login() {
 
-  const { setAuth } = useContext(AuthContext);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [formData, setFormData] = useState({ email: "", password: "" });
   const [disabled, setDisabled] = useState(false);
+  const { login } = useAuth();
   const navigate = useNavigate();
 
-  function login(e) {
+  function updateForm(e) {
+    setFormData({...formData, [e.target.name]: e.target.value });
+  }
+
+  function submitForm(e) {
     e.preventDefault();
-    const data = {
-      email: email,
-      password: password
-    }
+
     const url = `http://localhost:5000/`;
     // para quando tiver o deploy 
     //const url = `${import.meta.env.VITE_API_URL}/`
 
-    const promise = axios.post(url, data);
     setDisabled(true);
-    promise.then(response => {
-      localStorage.setItem("user", JSON.stringify({ email, token: response.data.token, name: response.data.name }));
-      setAuth({ email, token: response.data.token, name: response.data.name })
-      navigate("/home");
 
+    const promise = axios.post(url, {...formData});
+    promise.then(res => {
+
+      login(res.data);
+      navigate("/home");
     });
-    promise.catch(response => {
-      alert(response.response.data.message);
+    promise.catch(err => {
+      alert(err.message);
       setDisabled(false);
     });
   }
@@ -42,21 +41,36 @@ export default function Login() {
 
   return (
     <SingInContainer>
-      <form onSubmit={login}>
+      <form onSubmit={submitForm}>
         <AllArticlesLogo />
-        <input placeholder="E-mail" type="email" required value={email} onChange={(e) => setEmail(e.target.value)} disabled={disabled} />
-        <input placeholder="Password" type="password" autoComplete="new-password" required value={password} onChange={(e) => setPassword(e.target.value)} disabled={disabled} />
+        <input 
+          placeholder="E-mail" 
+          type="email" 
+          required 
+          value={formData.email} 
+          onChange={updateForm} 
+          disabled={disabled} />
+
+        <input 
+          placeholder="Senha" 
+          type="password" 
+          autoComplete="new-password" 
+          required 
+          value={formData.password} 
+          onChange={updateForm} 
+          disabled={disabled} />
+
         <button type='submit' disabled={disabled} >
           {disabled ? (
             <ThreeDots width={32} height={21} border-radius={4.5} background-color="#133ae4" color="#FFFFFF" font-size={9} />
           ) : (
-            <p>To enter</p>
+            <p>Entrar</p>
           )}
         </button>
       </form>
 
       <Link to={"/cadastro"}>
-        First time? Register!
+        Primeira vez? Cadastre-se!
       </Link>
     </SingInContainer>
   )
