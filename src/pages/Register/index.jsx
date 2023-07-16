@@ -2,8 +2,9 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import AllArticlesLogo from "../../components/AllArticlesLogo";
-import axios from "axios";
 import { ThreeDots } from "react-loader-spinner";
+
+import API from "../../services/api";
 
 export default function Register() {
 
@@ -19,24 +20,15 @@ export default function Register() {
     e.preventDefault();
 
     const { name, email, password, confirmPassword, image } = formData;
-    console.log(name)
-    console.log(email)
-    console.log(password)
-    console.log(image)
-
 
     // se as senhas estão iguais ou nao 
     if (password !== confirmPassword) {
       alert("As senhas inseridas são diferentes!");
     }
 
-    const url = `http://localhost:5000/cadastro`
-    // para quando tiver o deploy 
-    //const url = `${import.meta.env.VITE_API_URL}/cadastro`
-
     setDisabled(true);
 
-    const promise = axios.post(url, { name, email, password, image })
+    const promise = API.signUp({ name, email, password, image });
     promise.then(() => navigate('/'));
     promise.catch(err => {
       alert(err.message);

@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import useAuth from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 
 import Products from "./Products";
-import { Container, Footer, ScrollButton } from "./style";
+import { Container, Title, Footer, ScrollButton } from "./style";
+
+import API from "../../services/api";
 
 export default function Home() {
 
@@ -25,10 +26,7 @@ export default function Home() {
 
     const limit = scrollProducts.counter === 0 ? "" : `?limit=${scrollProducts.counter}`;
 
-    const url = `http://localhost:5000/home${limit}`;
-    const config = {headers: {Authorization: `Bearer ${auth.token}`}};
-
-    axios.get(url, config)
+    API.getProductList(limit, auth.token)
       .then(res => {
         
         const productsLength = res.data.length;
@@ -50,6 +48,8 @@ export default function Home() {
 
   return (
     <Container>
+      <Title>Produtos Recentes</Title>
+
       <Products productsList={productsList} />
 
       <Footer hidden={scrollProducts.maxLength}>

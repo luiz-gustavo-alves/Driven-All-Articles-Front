@@ -2,9 +2,10 @@ import styled from "styled-components"
 import { Link, useNavigate } from "react-router-dom"
 import { useState } from "react";
 import { ThreeDots } from "react-loader-spinner";
-import axios from "axios";
 import useAuth from "../../hooks/useAuth";
 import AllArticlesLogo from "../../components/AllArticlesLogo";
+
+import API from "../../services/api";
 
 export default function Login() {
 
@@ -20,15 +21,10 @@ export default function Login() {
   function submitForm(e) {
     e.preventDefault();
 
-    const url = `http://localhost:5000/`;
-    // para quando tiver o deploy 
-    //const url = `${import.meta.env.VITE_API_URL}/`
-
     setDisabled(true);
 
-    const promise = axios.post(url, {...formData});
+    const promise = API.signIn({...formData});
     promise.then(res => {
-
       login(res.data);
       navigate("/home");
     });
@@ -130,7 +126,7 @@ const SingInContainer = styled.section`
 `
 
 const Form = styled.form`
-    position: relative;
+  position: relative;
 `;
 
 const Loader = styled.div`
