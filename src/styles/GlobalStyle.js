@@ -11,7 +11,6 @@ const GlobalStyle = createGlobalStyle`
         font-style: normal;
         font-weight: 400;
         background-color: #efefef;
-        padding-top: 80px;
     }
     button {
         outline: none;
