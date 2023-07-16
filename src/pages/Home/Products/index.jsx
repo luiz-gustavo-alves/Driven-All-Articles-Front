@@ -1,9 +1,15 @@
+import useProductInfo from "../../../hooks/useProductInfo";
+import { useNavigate } from "react-router-dom";
 import { Container, Content, Details } from "./style";
 
 export default function Products({ productsList }) {
 
-  function handleClick(product) {
-    console.log(product);
+  const { getProductPageInfo } = useProductInfo();
+  const navigate = useNavigate();
+
+  function productPage(product) {
+    getProductPageInfo(product);
+    navigate(`../product-page/${product._id}`);
   }
 
   return (
@@ -12,7 +18,7 @@ export default function Products({ productsList }) {
         <Content 
           key={product._id} 
           title={product.title}
-          onClick={() => handleClick(product)}
+          onClick={() => productPage(product)}
         >
           <img src={product.image} />
           <Details>
