@@ -4,8 +4,8 @@ import styled from "styled-components";
 import AllArticlesLogo from "../../components/AllArticlesLogo";
 import axios from "axios";
 import { ThreeDots } from "react-loader-spinner";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUpload } from '@fortawesome/free-solid-svg-icons';
+
+
 
 export default function Register() {
 
@@ -14,17 +14,22 @@ export default function Register() {
   const navigate = useNavigate();
 
   function updateForm(e) {
-    setFormData({...formData, [e.target.name]: e.target.value });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   }
 
   function submitForm(e) {
     e.preventDefault();
 
-    const { name, email, password, image, confirmPassword } = formData;
+    const { name, email, password, confirmPassword, image } = formData;
+    console.log(name)
+    console.log(email)
+    console.log(password)
+    console.log(image)
+
 
     // se as senhas estão iguais ou nao 
     if (password !== confirmPassword) {
-      alert("Entered passwords are different!");
+      alert("As senhas inseridas são diferentes!");
     }
 
     const url = `http://localhost:5000/cadastro`
@@ -45,68 +50,64 @@ export default function Register() {
     <SingUpContainer>
       <Form onSubmit={submitForm}>
         <AllArticlesLogo />
-        <input 
-          placeholder="Nome" 
+        <input
+          placeholder="Nome"
           type="text"
           name="name"
-          required 
-          value={formData.name} 
-          onChange={updateForm} 
+          required
+          value={formData.name}
+          onChange={updateForm}
           disabled={disabled} />
 
-        <input 
-          placeholder="E-mail" 
-          type="email" 
+        <input
+          placeholder="E-mail"
+          type="email"
           name="email"
-          required 
-          value={formData.email} 
-          onChange={updateForm} 
+          required
+          value={formData.email}
+          onChange={updateForm}
           disabled={disabled} />
 
-        <input 
-          placeholder="Senha" 
-          type="password" 
+        <input
+          placeholder="Senha"
+          type="password"
           name="password"
-          required 
-          value={formData.password} 
-          onChange={updateForm} 
+          required
+          value={formData.password}
+          onChange={updateForm}
           disabled={disabled} />
 
-        <input 
-          placeholder="Confirmar Senha" 
+        <input
+          placeholder="Confirmar Senha"
           type="password"
           name="confirmPassword"
           required
-          value={formData.confirmPassword} 
-          onChange={updateForm} 
+          value={formData.confirmPassword}
+          onChange={updateForm}
           disabled={disabled} />
 
-        <FileInputLabel htmlFor="imagemInput">
-          <FileIcon icon={faUpload} className="file-icon" />
-          Selecione uma foto de perfil
-          <FileInput 
-            id="imagemInput" 
-            type="file" 
-            accept="image/*" 
-            name="image"
-            required 
-            value={formData.image} 
-            onChange={updateForm} 
-            disabled={disabled} />
-        </FileInputLabel>
+        <input
+          placeholder="Link da imagem"
+          type="text"
+          name="image"
+          required
+          value={formData.image}
+          onChange={updateForm}
+          disabled={disabled}
+        />
 
         <button type='submit' disabled={disabled} >
-         {disabled ? "" : "Entrar"}
+          {disabled ? "" : "Entrar"}
         </button>
         <Loader>
-          <ThreeDots 
-            width={70} 
-            height={45} 
+          <ThreeDots
+            width={70}
+            height={45}
             border-radius={4.5}
             color="#000"
-            visible={disabled} 
+            visible={disabled}
             font-size={9} />
-          </Loader>
+        </Loader>
       </Form>
 
       <Link to={"/"}>
@@ -168,49 +169,15 @@ const SingUpContainer = styled.section`
 `
 const FileInput = styled.input`
     display: none;
-  `;
-
-const FileInputLabel = styled.label`
-    width: 75%;
-    height: 45px;
-    position: relative;
-    cursor: pointer;
-
-    display: flex;
-    align-items: center;
-    background-color: #efefef;
-    border-radius: 5px;
-    outline: none;
-    padding: 8px 12px;
-
-    font-size: 20px;
-    font-weight: 500;
-    color: #000;
-
-    &:focus {
-        outline: 2px solid #000;
-    }
-
-    &:hover {
-        outline: 2px solid #000;
-    }
-  `;
-
-const FileIcon = styled(FontAwesomeIcon)`
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-50%);
-    color: #333;
   `
 
 const Form = styled.form`
 
   position: relative;
-`;
+`
 
 const Loader = styled.div`
 
   position: absolute;
   bottom: 0;
-`;
+`
