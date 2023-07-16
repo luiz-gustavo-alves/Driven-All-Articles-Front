@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
+import AllArticlesLogo from "../AllArticlesLogo";
 import useAuth from "../../hooks/useAuth";
 import styled from "styled-components";
 
-import hamburguer_menu from "../../assets/images/hamburguer_menu.svg";
 import shopping_cart from "../../assets/images/shopping_cart.svg";
 
 export default function Header() {
@@ -25,7 +25,7 @@ export default function Header() {
         <Container>
 
             <LeftContent>
-                <img src={hamburguer_menu} title="Menu" />
+                <AllArticlesLogo />
             </LeftContent>
 
             <MiddleContent>
@@ -43,9 +43,12 @@ export default function Header() {
 
             <RightContent>
                 <div>
+                    <h2>+</h2>
+                </div>
+                <div>
                     <img src={shopping_cart} title="Compras"/>
                 </div>
-                <Avatar profileImage={auth.image}>
+                <Avatar>
                     <img src={auth.image} title={`${auth.name} avatar`} />
                 </Avatar>
             </RightContent>
@@ -58,11 +61,15 @@ const Container = styled.div`
 
     width: 100%;
     height: 56px;
-    background-color: white;
     padding: 35px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: fixed;
+    background-color: #217cff;
+    top: 0;
+    left: 0;
+    z-index: 100;
 `;
 
 const LeftContent = styled.div`
@@ -91,7 +98,19 @@ const MiddleContent = styled.div`
 const RightContent = styled.div`
 
     display: flex;
+    align-items: center;
     gap: 20px;
+
+    h2 {
+        font-size: 25px;
+        color: black;
+        background: white;
+        width: 20px;
+        border-radius: 15px;
+        text-align: center;
+        height: 22px;
+        cursor: pointer;
+    }
 
     img {
         width: 32px;

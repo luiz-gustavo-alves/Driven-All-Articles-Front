@@ -117,13 +117,14 @@ export default function Register() {
 }
 
 const SingUpContainer = styled.section`
+  width: 100vw;
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  max-width: 600px;
   margin: 0 auto;
+  background-color: #217cff;
 
   button{
     width: 75%;

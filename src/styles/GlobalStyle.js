@@ -10,7 +10,8 @@ const GlobalStyle = createGlobalStyle`
         font-family: 'Raleway', sans-serif;
         font-style: normal;
         font-weight: 400;
-        background-color: #217cff;
+        background-color: #efefef;
+        padding-top: 80px;
     }
     button {
         outline: none;

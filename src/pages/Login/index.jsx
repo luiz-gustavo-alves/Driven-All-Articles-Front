@@ -84,13 +84,14 @@ export default function Login() {
 }
 
 const SingInContainer = styled.section`
+  width: 100vw;
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: 0 auto;
-  max-width: 600px;
+  background-color: #217cff;
   
   button {
     width: 75%;
