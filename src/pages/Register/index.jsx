@@ -5,8 +5,6 @@ import AllArticlesLogo from "../../components/AllArticlesLogo";
 import axios from "axios";
 import { ThreeDots } from "react-loader-spinner";
 
-
-
 export default function Register() {
 
   const [formData, setFormData] = useState({ name: "", email: "", password: "", confirmPassword: "", image: "" });
@@ -49,7 +47,9 @@ export default function Register() {
   return (
     <SingUpContainer>
       <Form onSubmit={submitForm}>
-        <AllArticlesLogo />
+        <div onClick={() => navigate("/")}>
+          <AllArticlesLogo />
+        </div>
         <input
           placeholder="Nome"
           type="text"
@@ -167,9 +167,6 @@ const SingUpContainer = styled.section`
     }
   }
 `
-const FileInput = styled.input`
-    display: none;
-  `
 
 const Form = styled.form`
 

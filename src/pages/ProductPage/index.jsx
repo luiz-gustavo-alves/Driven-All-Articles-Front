@@ -1,11 +1,18 @@
 import useProductInfo from "../../hooks/useProductInfo";
+import { useNavigate } from "react-router-dom";
 import { Container, Content , LeftContent, RightContent, TopContent, DetailsContainer,  ValueContainer } from "./style";
 import { QuantityContainer, QuantityButtonsContainer, ShoppingCartButton, Description } from "./style";
 
 export default function ProductPage() {
 
   const { productInfo } = useProductInfo();
+  const navigate = useNavigate();
+
   const value = `R$ ${productInfo.value.toFixed(2).replace(".", ",")}`;
+
+  function checkoutPage() {
+    navigate(`../checkout/${productInfo._id}`);
+  }
 
   return (
     <Container>
@@ -38,7 +45,7 @@ export default function ProductPage() {
           </div>
 
           <div>
-            <ShoppingCartButton>
+            <ShoppingCartButton onClick={checkoutPage}>
               Adicionar Ao Carrinho
             </ShoppingCartButton>
           </div>

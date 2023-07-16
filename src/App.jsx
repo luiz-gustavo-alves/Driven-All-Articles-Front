@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { Home, Login, Register, CreateProducts, ProductPage } from "./pages";
+import { Home, Login, Register, CreateProduct, ProductPage } from "./pages";
 import Checkout from "./pages/Checkout/Checkout.jsx";
 import Header from "./components/Header/index.jsx"
 
@@ -17,8 +17,8 @@ export default function App() {
             <Route path="/" element={<Login />}></Route>
             <Route path="/cadastro" element={<Register />}></Route>
             <Route path="/home" element={<Home />}></Route>
-            <Route path="/checkout" element={<Checkout />}></Route>
-            <Route path="/create-products" element={<CreateProducts />}></Route>
+            <Route path="/checkout/:id" element={<Checkout />}></Route>
+            <Route path="/create-product" element={<CreateProduct />}></Route>
             <Route path="/product-page/:id" element={<ProductPage />}></Route>
             <Route path="/*" element={<Navigate to="/" />}></Route>
           </Routes>

@@ -42,7 +42,9 @@ export default function Login() {
   return (
     <SingInContainer>
       <Form onSubmit={submitForm}>
-        <AllArticlesLogo />
+        <div onClick={() => navigate("/")}>
+          <AllArticlesLogo />
+        </div>
         <input 
           placeholder="E-mail" 
           type="email"
