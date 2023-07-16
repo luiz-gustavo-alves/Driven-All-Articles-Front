@@ -9,10 +9,13 @@ import { Container, Footer, ScrollButton } from "./style";
 export default function Home() {
 
   const [productsList, setProductsList] = useState(null);
-  const [scrollCounter, setScrollCounter] = useState(0);
-
+  const [scrollProducts, setScrollProducts] = useState({ counter: 0, length: 0, maxLength: false });
   const { auth } = useAuth();
   const navigate = useNavigate();
+
+  function updateScroll(newState) {
+    setScrollProducts(currentState => ({ ...currentState, ...newState }));
+  }
 
   useEffect(() => {
 
@@ -20,18 +23,26 @@ export default function Home() {
       navigate("/");
     }
 
-    const limit = scrollCounter === 0 ? "" : `?limit=${scrollCounter}`;
+    const limit = scrollProducts.counter === 0 ? "" : `?limit=${scrollProducts.counter}`;
 
     const url = `http://localhost:5000/home${limit}`;
     const config = {headers: {Authorization: `Bearer ${auth.token}`}};
 
     axios.get(url, config)
-      .then(res => setProductsList(res.data))
+      .then(res => {
+        
+        const productsLength = res.data.length;
+        if (productsLength !== scrollProducts.length) {
+          updateScroll({ length: productsLength });
+        } else {
+          updateScroll({ maxLength: true });
+        }
+
+        setProductsList(res.data);
+      })
       .catch(err => console.log(err.message));
 
-  }, [scrollCounter, ]);
-
-  console.log(productsList);
+  }, [scrollProducts.counter, ]);
 
   if (productsList === null) {
     return <h1>Carregando..</h1>
@@ -41,10 +52,10 @@ export default function Home() {
     <Container>
       <Products productsList={productsList} />
 
-      <Footer>
+      <Footer hidden={scrollProducts.maxLength}>
         <ScrollButton 
           title="Ver mais produtos"
-          onClick={() => setScrollCounter(scrollCounter + 1)}
+          onClick={() => updateScroll({ counter: scrollProducts.counter + 1 })}
         >{"Ver mais produtos"}
         </ScrollButton>
       </Footer>

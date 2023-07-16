@@ -7,7 +7,7 @@ const Container = styled.div`
 
 const Footer = styled.footer`
 
-    display: flex;
+    display: ${props => props.hidden ? "none" : "flex"};
     justify-content: center;
     align-items: center;
     margin-top: 35px;
