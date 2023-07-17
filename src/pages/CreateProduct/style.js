@@ -68,6 +68,7 @@ const Form = styled.form`
         background-color: #efefef;
         font-size: 20px;
         padding: 15px;
+        resize: none;
     }
     input {
         width: 85%;
