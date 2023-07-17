@@ -61,7 +61,15 @@ const Form = styled.form`
             outline: 2px solid #000;
         }
     }
-    input{
+
+    textarea {
+        width: 85%;
+        height: 90px;
+        background-color: #efefef;
+        font-size: 20px;
+        padding: 15px;
+    }
+    input {
         width: 85%;
         height: 45px;
         background-color: #efefef;

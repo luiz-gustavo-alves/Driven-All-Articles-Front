@@ -61,9 +61,10 @@ export default function CreateProduct() {
               onChange={updateForm} 
               disabled={disabled} />
 
-          <input 
+          <textarea 
             placeholder="Descrição" 
             name="description" 
+            rows={6}
             required 
             value={formData.description} 
             onChange={updateForm} 

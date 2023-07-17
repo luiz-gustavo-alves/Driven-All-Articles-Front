@@ -227,6 +227,10 @@ const Description = styled.div`
         margin-bottom: 15px;
     }
 
+    h3 {
+        white-space: pre-wrap;
+    }
+
     @media (max-width: 654px) {
 
         margin: 25px auto;
