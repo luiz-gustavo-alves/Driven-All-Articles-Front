@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 const Container = styled.div`
 
+    opacity: ${props => props.disabled ? "0.5" : "1"};
+    cursor: ${props => props.disabled ? "not-allowed" : "auto"};
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -22,6 +24,16 @@ const Content = styled.div`
     img {
         width: 188px;
         height: 188px;
+    }
+
+    @media (max-width: 654px) {
+
+        width: 100px;
+
+        img {
+            width: 100px;
+            height: 100px;
+        }
     }
 `;
 
@@ -47,6 +59,15 @@ const Details = styled.div`
         font-weight: 500;
         font-size: 18px;
         color: #217cff;
+    }
+
+    @media (max-width: 654px) {
+
+        padding: 8px;
+
+        h2, h3 {
+            font-size: 14px;
+        }
     }
 `;
 

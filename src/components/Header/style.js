@@ -18,8 +18,16 @@ const Container = styled.div`
 const LeftContent = styled.div`
 
     img {
-        width: 26px;
-        cursor: pointer;
+        display: none;
+    }
+
+    @media (max-width: 654px) {
+
+        img {   
+            display: block;
+            width: 24px;
+            cursor: pointer;
+        }
     }
 `;
 
@@ -46,6 +54,16 @@ const MiddleContent = styled.div`
         right: 25px;
         cursor: pointer;
     }
+
+    @media (max-width: 654px) {
+
+        input {
+            
+            &::placeholder {
+                font-size: 14px;
+            }
+        }
+    }
 `;
 
 const RightContent = styled.div`
@@ -62,6 +80,14 @@ const RightContent = styled.div`
 
     .addButton {
         width: 28px;
+    }
+
+    @media (max-width: 654px) {
+        
+        img {
+            width: 24px;
+            height: 24px;
+        }
     }
 `;
 

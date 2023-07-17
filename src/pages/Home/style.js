@@ -18,9 +18,17 @@ const Title = styled.div`
         font-size: 32px;
         font-weight: 500;
         font-style: italic;
+        text-align: center;
         color: #000;
         letter-spacing: 5px;
     }
+
+    @media (max-width: 654px) {
+
+        h2 {
+            font-size: 24px;
+        } 
+    }  
 `;
 
 const Content = styled.div`
@@ -42,6 +50,12 @@ const ScrollButton = styled.button`
     border: 1px solid #217cff;
     background-color: #217cff;
     width: 300px;
+
+    @media (max-width: 654px) {
+        width: 200px;
+        height: 50px;
+        font-size: 18px;
+    }
 `;
 
 const Loader = styled.div`

@@ -4,7 +4,12 @@ const Container = styled.div`
 
     padding: 100px 35px 60px 35px;
     margin: 0 auto;
-    max-width: 900px;
+    width: 654px;
+
+    @media (max-width: 654px) {
+        padding: 100px 0;
+        width: 80%;
+    }
 `;
 
 const Content = styled.div`
@@ -12,6 +17,14 @@ const Content = styled.div`
     display: flex;
     height: 350px;
     background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+    @media (max-width: 654px) {
+        height: auto;
+        flex-direction: column;
+        width: 275px;
+        margin: 0 auto;
+    }
 `;
 
 const LeftContent = styled.div`
@@ -26,6 +39,17 @@ const LeftContent = styled.div`
         width: 300px;
         height: 300px;
     }
+
+    @media (max-width: 654px) {
+
+        margin-left: 0%;
+        margin-top: 15px;
+
+        img {
+            width: 225px;
+            height: 225px;
+        }
+    }
 `;
 
 const RightContent = styled.div`
@@ -37,7 +61,7 @@ const RightContent = styled.div`
     margin: 25px;
     width: 100%;
 
-    h2, h3, h4 {
+    h2, h3 {
         overflow: hidden;
         word-break: break-word;
         text-overflow: ellipsis;
@@ -49,7 +73,16 @@ const RightContent = styled.div`
     h2 {
         font-size: 20px;
         font-weight: 600;
-        -webkit-line-clamp: 2;
+        -webkit-line-clamp: 3;
+    }
+
+    @media (max-width: 654px) {
+        padding: 25px;
+        margin: 0;
+
+        h2 {
+            font-size: 18px;
+        }
     }
 `;
 
@@ -72,12 +105,21 @@ const ValueContainer = styled.div`
     align-items: center;
     background-color: #f8f8f8;
 
-    h4 {
+    h3 {
         font-size: 34px;
         font-weight: 700;
         color: #217cff;
         cursor: pointer;
         margin: 15px;
+    }
+
+    @media (max-width: 654px) {
+        
+        height: 35px;
+
+        h3 {
+            font-size: 26px;
+        }
     }
 `;
 
@@ -92,24 +134,9 @@ const QuantityContainer = styled.div`
     p {
         color: #757575;
     }
-`;
 
-const QuantityButtonsContainer = styled.div`
-
-    display: flex;
-    align-items: center;
-
-    .quantity {
-        font-size: 14px;
-    }
-
-    button {
-        width: 24px;
-        height: 24px;
-        border: 1px solid #757575;
-        color: #000;
-        font-size: 18px;
-        padding: 0;
+    span {
+        font-weight: 700;
     }
 `;
 
@@ -121,6 +148,12 @@ const ShoppingCartButton = styled.button`
     color: #fff;
     font-size: 18px;
     padding: 0;
+
+    @media (max-width: 654px) {
+
+        height: 25px;
+        font-size: 14px;
+    }
 `;
 
 const Description = styled.div`
@@ -136,6 +169,16 @@ const Description = styled.div`
         text-decoration: underline;
         margin-bottom: 15px;
     }
+
+    @media (max-width: 654px) {
+
+        margin: 25px auto;
+        width: 275px;
+
+        p {
+            font-size: 15px;
+        }
+    }
 `;
 
 export {
@@ -147,7 +190,6 @@ export {
     DetailsContainer,
     ValueContainer,
     QuantityContainer,
-    QuantityButtonsContainer,
     ShoppingCartButton,
     Description
 }

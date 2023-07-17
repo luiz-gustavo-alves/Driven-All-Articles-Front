@@ -3,8 +3,7 @@ import useAuth from "../../hooks/useAuth";
 import useCartInfo from "../../hooks/useCartInfo";
 import Products from "./Products";
 import { useNavigate } from "react-router-dom";
-import { Oval } from "react-loader-spinner";
-import { Container, Content, Title, Default, Loader } from "./style";
+import { Container, Content, Title, Default } from "./style";
 
 import API from "../../services/api";
 
@@ -14,7 +13,6 @@ export default function CartInfo() {
   const { cartInfo, getCartInfo } = useCartInfo();
   const { auth } = useAuth();
   const navigate = useNavigate();
-  
 
   useEffect(() => {
 
@@ -26,7 +24,7 @@ export default function CartInfo() {
       .then(res => getCartInfo(res.data))
       .catch(err => alert(err.message));
 
-  }, [cartOperation , ])
+  }, [cartOperation, ])
 
   const emptyCart = (Object.keys(cartInfo).length === 0) ? true : false;
 

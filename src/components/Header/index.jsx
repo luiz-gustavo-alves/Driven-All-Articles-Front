@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import AllArticlesLogo from "../AllArticlesLogo";
 import useAuth from "../../hooks/useAuth";
 import useCartInfo from "../../hooks/useCartInfo";
 import { Container, LeftContent, MiddleContent, RightContent, NotificationIcon, Avatar } from "./style";
 
+import home from "../../assets/images/home.svg";
 import magnifying_glass from "../../assets/images/magnifying_glass.svg";
 import add_button from "../../assets/images/add_button.svg";
 import shopping_cart from "../../assets/images/shopping_cart.svg";
@@ -34,7 +35,9 @@ export default function Header() {
             <LeftContent>
                 <div onClick={() => navigate("/home")}>
                     <AllArticlesLogo />
+                    <img src={home} />
                 </div>
+
             </LeftContent>
 
             <MiddleContent>

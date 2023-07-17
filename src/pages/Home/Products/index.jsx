@@ -14,19 +14,22 @@ export default function Products({ productsList }) {
 
   return (
     <Container>
-      {productsList.map(product => (
-        <Content 
-          key={product._id} 
-          title={product.title}
-          onClick={() => productPage(product)}
-        >
-          <img src={product.image} />
-          <Details>
-            <h2>{product.title}</h2>
-            <h3>R$ {product.value.toFixed(2).replace(".", ",")}</h3>
-          </Details>
-        </Content>
-      ))}
+      {productsList.map(product => {
+        const zeroQuantity = (product.quantity <= 0) ? true : false; 
+        return (
+          <Content 
+            key={product._id} 
+            title={product.title}
+            disabled={zeroQuantity}
+            onClick={() => productPage(product)}
+          >
+            <img src={product.image} />
+            <Details>
+              <h2>{product.title}</h2>
+              <h3>R$ {product.value.toFixed(2).replace(".", ",")}</h3>
+            </Details>
+          </Content>
+        )})}
     </Container>
   );
 }

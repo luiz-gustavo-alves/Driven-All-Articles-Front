@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import { Container, Content , LeftContent, RightContent, TopContent, DetailsContainer,  ValueContainer } from "./style";
-import { QuantityContainer, QuantityButtonsContainer, ShoppingCartButton, Description } from "./style";
+import { QuantityContainer, ShoppingCartButton, Description } from "./style";
 
 export default function ProductPage() {
 
@@ -36,19 +36,14 @@ export default function ProductPage() {
               <DetailsContainer>
               <h2 title="Título">{productInfo.title}</h2>
                 <ValueContainer>
-                  <h4 title={value}>{value}</h4>
+                  <h3 title={value}>{value}</h3>
                 </ValueContainer>
               </DetailsContainer>
             </TopContent>
 
             <div>
               <QuantityContainer>
-                <p>Quantidade</p>
-                <QuantityButtonsContainer>
-                  <button>-</button>
-                  <button className="quantity">1</button>
-                  <button>+</button>
-                </QuantityButtonsContainer>
+                <p>Quantidade: <span>{productInfo.quantity}</span></p>
               </QuantityContainer>
             </div>
           </div>

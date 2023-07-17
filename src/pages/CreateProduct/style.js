@@ -13,14 +13,24 @@ const Title = styled.div`
     justify-content: center;
     align-items: center;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 10px;
 
     h2 {
         font-size: 32px;
         font-weight: 500;
         font-style: italic;
+        text-align: center;
         color: #000;
         letter-spacing: 5px;
     }
+
+    @media (max-width: 654px) {
+
+        h2 {
+            font-size: 22px;
+            font-weight: 600;
+        } 
+    }  
 `;
 
 const Content = styled.div`

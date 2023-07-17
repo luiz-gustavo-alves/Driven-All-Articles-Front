@@ -21,6 +21,13 @@ const Title = styled.div`
         color: #000;
         letter-spacing: 5px;
     }
+
+    @media (max-width: 654px) {
+
+        h2 {
+            font-size: 24px;
+        }
+    }
 `;
 
 
@@ -39,25 +46,26 @@ const Default = styled.div`
     width: 600px;
     margin: 0 auto;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 15px;
 
     h2 {
         font-size: 24px;
+        text-align: center;
         color: #000;
     }
-`;
 
-const Loader = styled.div`
+    @media (max-width: 654px) {
+        width: 300px;
 
-    position: absolute;
-    top: 50%;  
-    left: 50%;
-    transform: translate(-50%, -50%);
+        h2 {
+            font-size: 20px;
+        }
+    }
 `;
 
 export {
     Container,
     Title,
     Content,
-    Loader,
     Default
 }
