@@ -7,16 +7,16 @@ export function CartInfoProvider({ children }) {
   const cartData = JSON.parse(localStorage.getItem("cart"));
 
   let data;
-  if (cartData.length === 0) {
-    data = null;
+  if (cartData === null || cartData.length === 0) {
+    data = false;
   } else {
-    data = {...cartData};
+    data = true;
   }
 
-  const [cartInfo, setCartInfo] = useState({...data});
+  const [cartInfo, setCartInfo] = useState(data);
 
   const getCartInfo = (cartData) => {
-    setCartInfo({...cartData});
+    setCartInfo(cartData);
     localStorage.setItem("cart", JSON.stringify(cartData));
   }
 

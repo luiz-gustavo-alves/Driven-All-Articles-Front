@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { Home, Login, Register, CreateProduct, ProductPage, CartInfo } from "./pages";
-import Checkout from "./pages/Checkout/Checkout.jsx";
+import { Home, Login, Register, CreateProduct, ProductPage, CartInfo, Checkout } from "./pages";
 import Header from "./components/Header/index.jsx"
 
 import { AuthProvider } from "./contexts/AuthContext";
@@ -19,7 +18,7 @@ export default function App() {
               <Route path="/" element={<Login />}></Route>
               <Route path="/cadastro" element={<Register />}></Route>
               <Route path="/home" element={<Home />}></Route>
-              <Route path="/checkout/:id" element={<Checkout />}></Route>
+              <Route path="/checkout" element={<Checkout />}></Route>
               <Route path="/create-product" element={<CreateProduct />}></Route>
               <Route path="/product-page/:id" element={<ProductPage />}></Route>
               <Route path="/cart-info" element={<CartInfo />}></Route>

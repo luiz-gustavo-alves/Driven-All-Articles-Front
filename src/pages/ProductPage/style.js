@@ -9,6 +9,9 @@ const Container = styled.div`
     @media (max-width: 654px) {
         padding: 100px 0;
         width: 80%;
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
     }
 `;
 
@@ -156,6 +159,60 @@ const ShoppingCartButton = styled.button`
     }
 `;
 
+const UserInfo = styled.div`
+
+    background-color: #fff;
+    padding: 15px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    margin-top: 25px;
+
+    display: flex;
+    justify-content: space-between;
+
+    @media (max-width: 654px) {
+        flex-direction: column;
+        width: 275px;
+        margin: 0 auto;
+    }
+`;
+
+const LeftUserInfo = styled.div`
+
+    display: flex;
+    align-items: center;
+
+    img {
+        width: 34px;
+        height: 34px;
+        margin-right: 10px;
+    }
+
+    h2 {
+        font-weight: 600;
+    }
+
+    @media (max-width: 654px) {
+
+        margin: 25px auto;
+        width: 275px;
+
+        p {
+            font-size: 15px;
+        }
+    }
+`;
+
+const RightUserInfo = styled.div`
+
+    display: flex;
+    align-items: center;
+
+    h2 {
+        color: #757575;
+        text-align: center;
+    }
+`;
+
 const Description = styled.div`
 
     background-color: #fff;
@@ -191,5 +248,8 @@ export {
     ValueContainer,
     QuantityContainer,
     ShoppingCartButton,
+    UserInfo,
+    LeftUserInfo,
+    RightUserInfo,
     Description
 }

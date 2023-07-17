@@ -3,16 +3,21 @@ import useAuth from "../../hooks/useAuth";
 import useCartInfo from "../../hooks/useCartInfo";
 import Products from "./Products";
 import { useNavigate } from "react-router-dom";
-import { Container, Content, Title, Default } from "./style";
+import { Container, Content, Title, CheckoutContainer, Checkout, Default } from "./style";
 
 import API from "../../services/api";
 
 export default function CartInfo() {
   
   const { cartOperation, setCartOperation } = useState(false);
-  const { cartInfo, getCartInfo } = useCartInfo();
+  const [ cartData, setCartData ] = useState([]);
+  const { getCartInfo } = useCartInfo();
   const { auth } = useAuth();
   const navigate = useNavigate();
+
+  function checkoutPage() {
+    navigate("/checkout");
+  }
 
   useEffect(() => {
 
@@ -21,12 +26,15 @@ export default function CartInfo() {
     }
 
     API.getShoppingCartInfo(auth.token)
-      .then(res => getCartInfo(res.data))
-      .catch(err => alert(err.message));
+      .then(res => {
+        setCartData(res.data);
+        getCartInfo(true);
+      })
+      .catch(err => alert(err.response.data));
 
   }, [cartOperation, ])
 
-  const emptyCart = (Object.keys(cartInfo).length === 0) ? true : false;
+  const emptyCart = (Object.keys(cartData).length === 0) ? true : false;
 
   return (
     <Container>
@@ -36,7 +44,14 @@ export default function CartInfo() {
 
       <Content>
         {!emptyCart &&
-          <Products products={cartInfo} />
+          <> 
+            <Products products={cartData} />
+            <CheckoutContainer>
+              <Checkout onClick={checkoutPage}>
+                {"Fazer Checkout"}
+              </Checkout>
+            </CheckoutContainer>
+          </>
         }
 
         {emptyCart && 

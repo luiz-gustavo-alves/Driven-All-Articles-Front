@@ -120,11 +120,45 @@ const Avatar = styled.div`
     }
 `;
 
+
+const ProfileOptions = styled.div`
+
+    width: 150px;
+    height: auto;
+    position: fixed;
+    background-color: #217cff;
+    border: 2px solid #F4F4F4;
+    top: 70px;
+    right: 0px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h2 {
+        color: #FFF;
+        word-break: break-word;
+        font-size: 14px;
+    }
+
+    button {
+
+        background-color: inherit;
+        font-size: 14px;
+        font-weight: 700;
+        border: none;
+        color: #FFF;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+`;
+
 export {
     Container,
     LeftContent,
     MiddleContent,
     RightContent,
     NotificationIcon,
-    Avatar
+    Avatar,
+    ProfileOptions
 }

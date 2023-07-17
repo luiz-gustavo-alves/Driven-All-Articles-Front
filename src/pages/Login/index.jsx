@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom"
 import { useState } from "react";
 import { ThreeDots } from "react-loader-spinner";
 import useAuth from "../../hooks/useAuth";
-import AllArticlesLogo from "../../components/AllArticlesLogo";
 
 import API from "../../services/api";
 
@@ -29,7 +28,7 @@ export default function Login() {
       navigate("/home");
     });
     promise.catch(err => {
-      alert(err.message);
+      alert(err.response.data);
       setDisabled(false);
     });
   }
@@ -39,7 +38,7 @@ export default function Login() {
     <SingInContainer>
       <Form onSubmit={submitForm}>
         <div onClick={() => navigate("/")}>
-          <AllArticlesLogo />
+          <Text>All Articles</Text>
         </div>
         <input 
           placeholder="E-mail" 
@@ -80,6 +79,13 @@ export default function Login() {
     </SingInContainer>
   )
 }
+
+const Text = styled.h1`
+    font-family: 'Saira Stencil One', cursive;
+    font-weight: 400;
+    font-size: 32px;
+    cursor: pointer;
+`;
 
 const SingInContainer = styled.section`
   width: 100vw;

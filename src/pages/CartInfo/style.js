@@ -30,10 +30,32 @@ const Title = styled.div`
     }
 `;
 
-
 const Content = styled.div`
     
     padding: 60px 35px;
+`;
+
+const CheckoutContainer = styled.div`
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 50px;
+    margin: 0 auto;
+`;
+
+const Checkout = styled.button`
+
+    color: #fff;
+    border: 1px solid #217cff;
+    background-color: #217cff;
+    width: 300px;
+
+    @media (max-width: 654px) {
+        width: 200px;
+        height: 50px;
+        font-size: 18px;
+    }
 `;
 
 const Default = styled.div`
@@ -67,5 +89,7 @@ export {
     Container,
     Title,
     Content,
+    CheckoutContainer,
+    Checkout,
     Default
 }

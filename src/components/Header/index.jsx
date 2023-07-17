@@ -1,20 +1,23 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import AllArticlesLogo from "../AllArticlesLogo";
 import useAuth from "../../hooks/useAuth";
 import useCartInfo from "../../hooks/useCartInfo";
-import { Container, LeftContent, MiddleContent, RightContent, NotificationIcon, Avatar } from "./style";
+import { Container, LeftContent, MiddleContent, RightContent, NotificationIcon, Avatar, ProfileOptions } from "./style";
 
 import home from "../../assets/images/home.svg";
 import magnifying_glass from "../../assets/images/magnifying_glass.svg";
 import add_button from "../../assets/images/add_button.svg";
 import shopping_cart from "../../assets/images/shopping_cart.svg";
 
+import API from "../../services/api";
+
 export default function Header() {
 
     const [formData, setFormData] = useState({ searchQuery: "" });
+    const [showProfileOptions, setShowProfileOptions] = useState(false);
     const { auth } = useAuth();
-    const cartInfo = useCartInfo();
+    const { cartInfo } = useCartInfo();
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -27,7 +30,24 @@ export default function Header() {
         setFormData({...formData, [e.target.name]: e.target.value });
     }
 
-    const displayNotification = (Object.keys(cartInfo).length === 0) ? true : false;
+    function toggleProfileOptions() {
+        (showProfileOptions) ? setShowProfileOptions(false) : setShowProfileOptions(true);
+    }
+
+    function logout() {
+
+        setShowProfileOptions(false);
+
+        setTimeout(() => {
+            API.logout(auth.token);
+            localStorage.removeItem("auth");
+            localStorage.removeItem("cart");
+            localStorage.removeItem("product");
+            navigate("/");
+        }, 500)
+    }
+
+    const displayNotification = (cartInfo === true) ? true : false;
 
     return (
         <Container>
@@ -66,9 +86,15 @@ export default function Header() {
                         <h2>!</h2>
                     </NotificationIcon>
                 </div>
-                <Avatar>
+                <Avatar onClick={toggleProfileOptions}>
                     <img src={auth.image} title={`${auth.name} avatar`} />
                 </Avatar>
+                {showProfileOptions &&
+                    <ProfileOptions>
+                        <h2>{auth.name}</h2>
+                        <button onClick={logout}>Sair</button>
+                    </ProfileOptions>
+                }
             </RightContent>
             
         </Container>

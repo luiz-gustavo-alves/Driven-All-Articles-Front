@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import AllArticlesLogo from "../../components/AllArticlesLogo";
 import { ThreeDots } from "react-loader-spinner";
 
 import API from "../../services/api";
@@ -31,7 +30,7 @@ export default function Register() {
     const promise = API.signUp({ name, email, password, image });
     promise.then(() => navigate('/'));
     promise.catch(err => {
-      alert(err.message);
+      alert(err.response.data);
       setDisabled(false);
     });
   }
@@ -40,7 +39,7 @@ export default function Register() {
     <SingUpContainer>
       <Form onSubmit={submitForm}>
         <div onClick={() => navigate("/")}>
-          <AllArticlesLogo />
+          <Text>All Articles</Text>
         </div>
         <input
           placeholder="Nome"
@@ -108,6 +107,13 @@ export default function Register() {
     </SingUpContainer>
   )
 }
+
+const Text = styled.h1`
+    font-family: 'Saira Stencil One', cursive;
+    font-weight: 400;
+    font-size: 32px;
+    cursor: pointer;
+`;
 
 const SingUpContainer = styled.section`
   width: 100vw;

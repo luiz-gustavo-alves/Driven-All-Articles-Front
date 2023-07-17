@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-import useAuth from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
-
+import useAuth from "../../hooks/useAuth";
+import useCartInfo from "../../hooks/useCartInfo";
 import Products from "./Products";
+
 import { Oval } from "react-loader-spinner";
 import { Container, Content, Title, Footer, ScrollButton, Loader } from "./style";
 
@@ -28,6 +29,7 @@ export default function Home() {
     const limit = scrollProducts.counter === 0 ? "" : `?limit=${scrollProducts.counter}`;
 
     setTimeout(() => {
+
       API.getProductList(limit, auth.token)
       .then(res => {
         
@@ -40,7 +42,7 @@ export default function Home() {
 
         setProductsList(res.data);
       })
-      .catch(err => console.log(err.message));
+      .catch(err => alert(err.response));
     }, 500);
 
   }, [scrollProducts.counter, ]);

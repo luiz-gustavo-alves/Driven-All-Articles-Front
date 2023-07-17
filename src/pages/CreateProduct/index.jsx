@@ -32,7 +32,7 @@ export default function CreateProduct() {
       API.createProduct({ title, description, value, quantity, image }, auth.token)
       .then(() => navigate("/home"))
       .catch((err) => {
-        alert(err.message);
+        alert(err.response.data);
         setDisable(false);
       });
     }, 1000);
