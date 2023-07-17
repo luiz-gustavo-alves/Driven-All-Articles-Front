@@ -11,10 +11,12 @@ import API from "../../services/api";
 
 export default function Home() {
 
+
   const [productsList, setProductsList] = useState(null);
   const [productOperation, setProductOperation] = useState(false);
   const [scrollProducts, setScrollProducts] = useState({ counter: 0, length: 0, maxLength: false });
   const { auth } = useAuth();
+  const { getCartInfo } = useCartInfo();
   const navigate = useNavigate();
 
   function updateScroll(newState) {
@@ -30,6 +32,10 @@ export default function Home() {
     const limit = scrollProducts.counter === 0 ? "" : `?limit=${scrollProducts.counter}`;
 
     setTimeout(() => {
+
+      API.getShoppingCartInfo(auth.token)
+      .then(res => getCartInfo(res.data))
+      .catch(err => alert(err.response.data));
 
       API.getProductList(limit, auth.token)
       .then(res => {

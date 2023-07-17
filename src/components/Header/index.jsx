@@ -47,7 +47,7 @@ export default function Header() {
         }, 500)
     }
 
-    const displayNotification = (cartInfo === true) ? true : false;
+    const displayNotification = (cartInfo.length > 0) ? true : false;
 
     return (
         <Container>

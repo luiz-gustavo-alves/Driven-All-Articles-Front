@@ -28,7 +28,7 @@ export default function CartInfo() {
     API.getShoppingCartInfo(auth.token)
       .then(res => {
         setCartData(res.data);
-        getCartInfo(true);
+        getCartInfo(res.data);
       })
       .catch(err => alert(err.response.data));
 
