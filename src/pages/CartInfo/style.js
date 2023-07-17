@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const Container = styled.div`
 
-    margin-top: 70px;
+    padding-top: 70px;
 `;
 
 const Title = styled.div`
@@ -23,25 +23,27 @@ const Title = styled.div`
     }
 `;
 
-const Content = styled.div`
 
-    margin: 60px 35px;
+const Content = styled.div`
+    
+    padding: 60px 35px;
 `;
 
-const Footer = styled.footer`
+const Default = styled.div`
 
-    display: ${props => props.hidden ? "none" : "flex"};
+    background-color: #fff;
+    display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 35px;
-`;
+    height: 250px;
+    width: 600px;
+    margin: 0 auto;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
-const ScrollButton = styled.button`
-
-    color: #fff;
-    border: 1px solid #217cff;
-    background-color: #217cff;
-    width: 300px;
+    h2 {
+        font-size: 24px;
+        color: #000;
+    }
 `;
 
 const Loader = styled.div`
@@ -54,9 +56,8 @@ const Loader = styled.div`
 
 export {
     Container,
-    Content,
     Title,
-    Footer,
-    ScrollButton,
-    Loader
+    Content,
+    Loader,
+    Default
 }

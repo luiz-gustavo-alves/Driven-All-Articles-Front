@@ -2,22 +2,34 @@ import styled from "styled-components";
 
 const Container = styled.div`
 
-    width: 100vw;
-    height: 100vh;
+    margin-top: 70px;
+`;
+
+const Title = styled.div`
+
+    background-color: #fff;
+    height: 100px;
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    padding: 100px 35px 60px 35px;
-    max-width: 900px;
-    margin: 0 auto;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
     h2 {
-        font-size: 24px;
+        font-size: 32px;
         font-weight: 500;
+        font-style: italic;
         color: #000;
-        text-decoration: underline;
-        margin-bottom: 30px;
+        letter-spacing: 5px;
     }
+`;
+
+const Content = styled.div`
+
+    width: 100vw;
+    height: 100vh;
+    max-width: 900px;
+    margin: 0 auto;
+    padding-top: 60px;
 `;
 
 const Form = styled.form`
@@ -25,6 +37,7 @@ const Form = styled.form`
     background-color: #fff;
     padding: 15px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    position: relative;
 
     button {
         width: 85%;
@@ -54,7 +67,15 @@ const Form = styled.form`
     }
 `;
 
+const Loader = styled.div`
+  position: absolute;
+  bottom: 0;
+`;
+
 export {
     Container,
-    Form
+    Title,
+    Content,
+    Form,
+    Loader
 }

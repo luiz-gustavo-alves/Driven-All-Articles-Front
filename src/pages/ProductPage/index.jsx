@@ -1,10 +1,13 @@
 import useProductInfo from "../../hooks/useProductInfo";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 import { Container, Content , LeftContent, RightContent, TopContent, DetailsContainer,  ValueContainer } from "./style";
 import { QuantityContainer, QuantityButtonsContainer, ShoppingCartButton, Description } from "./style";
 
 export default function ProductPage() {
 
+  const { auth } = useAuth();
   const { productInfo } = useProductInfo();
   const navigate = useNavigate();
 
@@ -13,6 +16,12 @@ export default function ProductPage() {
   function checkoutPage() {
     navigate(`../checkout/${productInfo._id}`);
   }
+
+  useEffect(() => {
+    if (!auth.token) {
+      navigate("/");
+    }
+  }, []);
 
   return (
     <Container>

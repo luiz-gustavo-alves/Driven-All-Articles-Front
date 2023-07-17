@@ -22,11 +22,25 @@ const createProduct = (body, token) => {
     return axios.post(`${BASE_URL}/create-product`, body, config);
 }
 
+const getShoppingCartInfo = (token) => {
+
+    const config = createConfig(token);
+    return axios.get(`${BASE_URL}/cart-info`, config);
+}
+
+const deleteProductInCart = (productID, token) => {
+
+    const config = createConfig(token);
+    return axios.delete(`${BASE_URL}/cart-info/${productID}/delete`, config);
+}
+
 const API = {
     signIn,
     signUp,
     getProductList,
-    createProduct
+    createProduct,
+    getShoppingCartInfo,
+    deleteProductInCart
 }
 
 export default API;

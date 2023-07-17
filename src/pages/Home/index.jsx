@@ -3,7 +3,8 @@ import useAuth from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 
 import Products from "./Products";
-import { Container, Title, Footer, ScrollButton } from "./style";
+import { Oval } from "react-loader-spinner";
+import { Container, Content, Title, Footer, ScrollButton, Loader } from "./style";
 
 import API from "../../services/api";
 
@@ -26,7 +27,8 @@ export default function Home() {
 
     const limit = scrollProducts.counter === 0 ? "" : `?limit=${scrollProducts.counter}`;
 
-    API.getProductList(limit, auth.token)
+    setTimeout(() => {
+      API.getProductList(limit, auth.token)
       .then(res => {
         
         const productsLength = res.data.length;
@@ -39,26 +41,44 @@ export default function Home() {
         setProductsList(res.data);
       })
       .catch(err => console.log(err.message));
+    }, 500);
 
   }, [scrollProducts.counter, ]);
 
   if (productsList === null) {
-    return <h1>Carregando..</h1>
+    return (
+      <Loader>
+        <Oval
+          height="200"
+          width="200"
+          color="#217cff"
+          ariaLabel='oval-loading'
+          secondaryColor="#217cff"
+          strokeWidth={2}
+          strokeWidthSecondary={2}
+          visible={true}
+        />
+      </Loader>
+    );
   }
 
   return (
     <Container>
-      <Title>Produtos Recentes</Title>
+      <Title>
+        <h2>Produtos Recentes</h2>
+      </Title>
 
-      <Products productsList={productsList} />
+      <Content>
+        <Products productsList={productsList} />
 
-      <Footer hidden={scrollProducts.maxLength}>
-        <ScrollButton 
-          title="Ver mais produtos"
-          onClick={() => updateScroll({ counter: scrollProducts.counter + 1 })}
-        >{"Ver mais produtos"}
-        </ScrollButton>
-      </Footer>
+        <Footer hidden={scrollProducts.maxLength}>
+          <ScrollButton 
+            title="Ver mais produtos"
+            onClick={() => updateScroll({ counter: scrollProducts.counter + 1 })}
+          >{"Ver mais produtos"}
+          </ScrollButton>
+        </Footer>
+      </Content>
     </Container>
   );
 }

@@ -30,7 +30,7 @@ const MiddleContent = styled.div`
 
     input {
         padding: 5px 35px 5px 10px;
-        background-color: #efefef;
+        background-color: #fff;
 
         &::placeholder {
             font-size: 16px;
@@ -54,20 +54,34 @@ const RightContent = styled.div`
     align-items: center;
     gap: 20px;
 
+    img {
+        width: 32px;
+        height: 100%;
+        cursor: pointer;
+    }
+
+    .addButton {
+        width: 28px;
+    }
+`;
+
+const NotificationIcon = styled.div`
+
+    display: ${props => props.displaynotification === "false" ?  "none" : "" };
+    position: relative;
+
     h2 {
-        font-size: 25px;
-        color: black;
-        background: white;
+        font-size: 20px;
+        font-weight: 700;
+        color: #fff;
+        background: #000;
         width: 20px;
         border-radius: 15px;
         text-align: center;
         height: 22px;
-        cursor: pointer;
-    }
-
-    img {
-        width: 32px;
-        height: 100%;
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
         cursor: pointer;
     }
 `;
@@ -85,5 +99,6 @@ export {
     LeftContent,
     MiddleContent,
     RightContent,
+    NotificationIcon,
     Avatar
 }

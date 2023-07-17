@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
-import { Container, Form } from "./style";
+import { ThreeDots } from "react-loader-spinner";
+import { Content, Title, Container, Form, Loader } from "./style";
 
 import API from "../../services/api";
 
@@ -25,22 +26,40 @@ export default function CreateProduct() {
     value = Number(value.replace(",", "."));
     quantity = Number(quantity.replace(",", "."));
 
-    API.createProduct({ title, description, value, quantity, image }, auth.token)
+    setDisable(true);
+
+    setTimeout(() => {
+      API.createProduct({ title, description, value, quantity, image }, auth.token)
       .then(() => navigate("/home"))
-      .catch((err) => alert(err.message));
+      .catch((err) => {
+        alert(err.message);
+        setDisable(false);
+      });
+    }, 1000);
+
   }
+
+  useEffect(() => {
+    if (!auth.token) {
+      navigate("/");
+    }
+  }, [])
 
   return (
     <Container>
-      <h2>Formulário para Criação de Produto</h2>
-      <Form onSubmit={submitForm}>
-        <input 
-            placeholder="Título" 
-            name="title" 
-            required 
-            value={formData.title} 
-            onChange={updateForm} 
-            disabled={disabled} />
+      <Title>
+        <h2>Formulário para Criação de Produto</h2>
+      </Title>
+
+      <Content>
+        <Form onSubmit={submitForm}>
+          <input 
+              placeholder="Título" 
+              name="title" 
+              required 
+              value={formData.title} 
+              onChange={updateForm} 
+              disabled={disabled} />
 
           <input 
             placeholder="Descrição" 
@@ -74,11 +93,20 @@ export default function CreateProduct() {
             onChange={updateForm} 
             disabled={disabled} />
 
-          <button type="submit">
-            Enviar
+          <button type='submit' disabled={disabled} >
+            {disabled ? "" : "Entrar"}
           </button>
-
-      </Form>
+          <Loader>
+            <ThreeDots 
+              width={70} 
+              height={70} 
+              border-radius={4.5}
+              color="#fff"
+              visible={disabled} 
+              font-size={9} />
+          </Loader>
+        </Form>
+      </Content>
     </Container>
   )
 }
