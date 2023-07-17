@@ -8,9 +8,9 @@ import { Container, Content, Title, CheckoutContainer, Checkout, Default } from 
 import API from "../../services/api";
 
 export default function CartInfo() {
-  
-  const { cartOperation, setCartOperation } = useState(false);
+
   const [ cartData, setCartData ] = useState([]);
+  const [cartOperation, setCartOperation] = useState(false);
   const { getCartInfo } = useCartInfo();
   const { auth } = useAuth();
   const navigate = useNavigate();
@@ -45,7 +45,7 @@ export default function CartInfo() {
       <Content>
         {!emptyCart &&
           <> 
-            <Products products={cartData} />
+            <Products products={cartData} setCartOperation={setCartOperation} />
             <CheckoutContainer>
               <Checkout onClick={checkoutPage}>
                 {"Fazer Checkout"}

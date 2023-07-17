@@ -12,6 +12,7 @@ import API from "../../services/api";
 export default function Home() {
 
   const [productsList, setProductsList] = useState(null);
+  const [productOperation, setProductOperation] = useState(false);
   const [scrollProducts, setScrollProducts] = useState({ counter: 0, length: 0, maxLength: false });
   const { auth } = useAuth();
   const navigate = useNavigate();
@@ -45,7 +46,7 @@ export default function Home() {
       .catch(err => alert(err.response));
     }, 500);
 
-  }, [scrollProducts.counter, ]);
+  }, [scrollProducts.counter, productOperation,  ]);
 
   if (productsList === null) {
     return (
@@ -71,7 +72,7 @@ export default function Home() {
       </Title>
 
       <Content>
-        <Products productsList={productsList} />
+        <Products productsList={productsList} setProductOperation={setProductOperation} />
 
         <Footer hidden={scrollProducts.maxLength}>
           <ScrollButton 

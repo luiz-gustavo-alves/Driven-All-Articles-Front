@@ -15,6 +15,7 @@ const Content = styled.div`
     height: 200px;
     background-color: #fff;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    position: relative;
 
     @media (max-width: 654px) {
         height: auto;
@@ -103,11 +104,25 @@ const BottomContent = styled.div`
     }
 `;
 
+const DeleteButton = styled.div`
+
+    position: absolute;
+    top: 5px;
+    right: 2px;
+
+    img {
+        width: 24px;
+        height: 24px;
+        cursor: pointer;
+    }
+`;
+
 export {
     Container,
     Content,
     LeftContent,
     RightContent,
     TopContent,
-    BottomContent
+    BottomContent,
+    DeleteButton
 }

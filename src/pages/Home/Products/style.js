@@ -2,8 +2,6 @@ import styled from "styled-components";
 
 const Container = styled.div`
 
-    opacity: ${props => props.disabled ? "0.5" : "1"};
-    cursor: ${props => props.disabled ? "not-allowed" : "auto"};
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -14,12 +12,15 @@ const Container = styled.div`
 
 const Content = styled.div`
 
+    opacity: ${props => props.zeroquantity === "true" ? 0.5 : 1};
+    cursor: ${props => props.zeroquantity === "true" ? "not-allowed" : "pointer"};
+
     width: 188px;
     display: flex;
     flex-direction: column;
     background-color: #fff;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-    cursor: pointer;
+    position: relative;
 
     img {
         width: 188px;
@@ -71,8 +72,22 @@ const Details = styled.div`
     }
 `;
 
+const DeleteButton = styled.div`
+
+    position: absolute;
+    top: 5px;
+    right: 2px;
+
+    img {
+        width: 24px;
+        height: 24px;
+        cursor: pointer;
+    }
+`;
+
 export {
     Container,
     Content,
-    Details
+    Details,
+    DeleteButton
 }

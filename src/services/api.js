@@ -22,6 +22,12 @@ const getProductList = (limit, token) => {
     return axios.get(`${BASE_URL}/home${limit}`, config);
 }
 
+const deleteProductById = (productID, token) => {
+
+    const config = createConfig(token);
+    return axios.delete(`${BASE_URL}/delete-product/${productID}`, config);
+}
+
 const getUserInfoById = (userID, token) => {
 
     const config = createConfig(token);
@@ -53,8 +59,7 @@ const deleteProductInCart = (productID, token) => {
 }
 
 const finishOrder = (token) => {
-    
-    console.log(token); 
+
     const config = createConfig(token);
     return axios.post(`${BASE_URL}/finish-order`, "", config);
 }
@@ -64,6 +69,7 @@ const API = {
     signUp,
     logout,
     getProductList,
+    deleteProductById,
     getUserInfoById,
     createProduct,
     buyProduct,
